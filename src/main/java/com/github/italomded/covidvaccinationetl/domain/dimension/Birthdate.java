@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
 @EqualsAndHashCode(of = {"fullDate"})
 @NoArgsConstructor
 @Entity(name = "dim_patient_birthdate")
-public class Birthdate {
+public class Birthdate implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
@@ -25,7 +26,7 @@ public class Birthdate {
     private Integer year;
 
     @OneToMany(mappedBy = "birthdate")
-    private Set<Patient> patients;
+    private Set<Patient> patients = new HashSet<>();
 
     public Birthdate(LocalDate fullDate) {
         this.fullDate = fullDate;

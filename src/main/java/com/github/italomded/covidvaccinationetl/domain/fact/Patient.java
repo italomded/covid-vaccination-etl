@@ -1,7 +1,6 @@
 package com.github.italomded.covidvaccinationetl.domain.fact;
 
 import com.github.italomded.covidvaccinationetl.domain.dimension.*;
-import domain.dimension.*;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,21 +20,21 @@ public class Patient {
     @Column(nullable = false)
     private Integer quantity = 1;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private PatientAdress adress;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private Birthdate birthdate;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private VaccinationSite vaccinationSite;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private VaccinationDate vaccinationDate;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private BiologicalSex biologicalSex;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private Vaccine vaccine;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private Color color;
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false) @ManyToOne
     private VaccineDose vaccineDose;
 
     public Patient(PatientAdress adress, Birthdate birthdate, VaccinationSite vaccinationSite, VaccinationDate vaccinationDate,

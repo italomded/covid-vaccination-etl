@@ -7,13 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
 @EqualsAndHashCode(of = {"representation"})
 @NoArgsConstructor
 @Entity(name = "dim_biological_sex")
-public class BiologicalSex {
+public class BiologicalSex implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
@@ -21,5 +22,5 @@ public class BiologicalSex {
     private Character representation;
 
     @OneToMany(mappedBy = "biologicalSex")
-    private Set<Patient> patients;
+    private Set<Patient> patients = new HashSet<>();
 }

@@ -4,13 +4,14 @@ import com.github.italomded.covidvaccinationetl.domain.fact.Patient;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
 @EqualsAndHashCode(of = {"corporateName"})
 @NoArgsConstructor
 @Entity(name = "dim_vaccination_site")
-public class VaccinationSite {
+public class VaccinationSite implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
@@ -22,5 +23,5 @@ public class VaccinationSite {
     private String state;
 
     @OneToMany(mappedBy = "vaccinationSite")
-    private Set<Patient> patients;
+    private Set<Patient> patients = new HashSet<>();
 }

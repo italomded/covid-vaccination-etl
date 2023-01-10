@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
 @EqualsAndHashCode(of = {"fullDate"})
 @NoArgsConstructor
 @Entity(name = "dim_vaccination_date")
-public class VaccinationDate {
+public class VaccinationDate implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
@@ -28,7 +29,7 @@ public class VaccinationDate {
     private Integer year;
 
     @OneToMany(mappedBy = "vaccinationDate")
-    private Set<Patient> patients;
+    private Set<Patient> patients = new HashSet<>();
 
     public VaccinationDate(LocalDate fullDate) {
         this.fullDate = fullDate;
