@@ -13,24 +13,24 @@ import java.util.List;
 public abstract class DomainPersist {
     protected DomainPersist next;
 
-    public boolean run(Dimension dimension, EntityManager entityManager) {
+    public Dimension run(Dimension dimension, EntityManager entityManager) {
         if (when(dimension)) {
             return verify(dimension, entityManager);
         } else {
             if (next != null) return next.run(dimension, entityManager);
-            return false;
+            throw new DomainPersistException("No domain persistence class listens to the type passed as an argument!" + dimension.getClass(), dimension.getClass());
         }
     }
 
-    public boolean persist(Dimension dimension, EntityManager entityManager, Query query) {
+    public Dimension persist(Dimension dimension, EntityManager entityManager, Query query) {
         List<Dimension> dimensionList = query.getResultList();
         if (dimensionList.isEmpty()) {
             entityManager.persist(dimension);
-            return true;
+            return dimension;
         }
-        return false;
+        return dimensionList.get(0);
     }
 
-    protected abstract boolean verify(Dimension dimension, EntityManager entityManager);
+    protected abstract Dimension verify(Dimension dimension, EntityManager entityManager);
     protected abstract boolean when(Dimension dimension);
 }

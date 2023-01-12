@@ -21,7 +21,7 @@ public class Patient {
     private Integer quantity = 1;
 
     @JoinColumn(nullable = false) @ManyToOne
-    private PatientAdress adress;
+    private PatientAddress adress;
     @JoinColumn(nullable = false) @ManyToOne
     private Birthdate birthdate;
     @JoinColumn(nullable = false) @ManyToOne
@@ -37,7 +37,7 @@ public class Patient {
     @JoinColumn(nullable = false) @ManyToOne
     private VaccineDose vaccineDose;
 
-    public Patient(PatientAdress adress, Birthdate birthdate, VaccinationSite vaccinationSite, VaccinationDate vaccinationDate,
+    public Patient(PatientAddress adress, Birthdate birthdate, VaccinationSite vaccinationSite, VaccinationDate vaccinationDate,
                    BiologicalSex biologicalSex, Vaccine vaccine, Color color, VaccineDose vaccineDose) {
         this.adress = adress;
         this.birthdate = birthdate;

@@ -15,7 +15,7 @@ public class BirthdatePersist extends DomainPersist {
     }
 
     @Override
-    protected boolean verify(Dimension dimension, EntityManager entityManager) {
+    protected Dimension verify(Dimension dimension, EntityManager entityManager) {
         Birthdate birthdate = (Birthdate) dimension;
         Query query = entityManager.createQuery(queryText);
         query.setParameter("fullDate", birthdate.getFullDate());

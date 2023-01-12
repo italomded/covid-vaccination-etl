@@ -15,7 +15,7 @@ public class VaccinationDatePersist extends DomainPersist {
     }
 
     @Override
-    protected boolean verify(Dimension dimension, EntityManager entityManager) {
+    protected Dimension verify(Dimension dimension, EntityManager entityManager) {
         VaccinationDate vaccinationDate = (VaccinationDate) dimension;
         Query query = entityManager.createQuery(queryText);
         query.setParameter("fullDate", vaccinationDate.getFullDate());

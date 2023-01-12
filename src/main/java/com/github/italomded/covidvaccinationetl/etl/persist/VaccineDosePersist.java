@@ -15,7 +15,7 @@ public class VaccineDosePersist extends DomainPersist {
     }
 
     @Override
-    protected boolean verify(Dimension dimension, EntityManager entityManager) {
+    protected Dimension verify(Dimension dimension, EntityManager entityManager) {
         VaccineDose vaccineDose = (VaccineDose) dimension;
         Query query = entityManager.createQuery(queryText);
         query.setParameter("dose", vaccineDose.getDose());

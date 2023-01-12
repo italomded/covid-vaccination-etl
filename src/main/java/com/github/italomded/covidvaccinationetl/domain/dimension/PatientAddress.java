@@ -10,9 +10,9 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"county"})
 @NoArgsConstructor
-@Table(name = "dim_patient_adress")
+@Table(name = "dim_patient_address")
 @Entity
-public class PatientAdress implements Dimension {
+public class PatientAddress implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 

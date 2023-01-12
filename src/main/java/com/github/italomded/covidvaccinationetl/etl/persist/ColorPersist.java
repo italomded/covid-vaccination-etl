@@ -15,7 +15,7 @@ public class ColorPersist extends DomainPersist {
     }
 
     @Override
-    protected boolean verify(Dimension dimension, EntityManager entityManager) {
+    protected Dimension verify(Dimension dimension, EntityManager entityManager) {
         Color color = (Color) dimension;
         Query query = entityManager.createQuery(queryText);
         query.setParameter("representation", color.getRepresentation());

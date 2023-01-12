@@ -5,15 +5,11 @@ import com.github.italomded.covidvaccinationetl.domain.dimension.*;
 import com.github.italomded.covidvaccinationetl.domain.fact.Patient;
 import com.github.italomded.covidvaccinationetl.utilities.lineconverter.converter.*;
 
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-
 public class LineConverter {
     private static Converter converter = new BiologicalSexConverter(
             new BirthdateConverter(
                     new ColorConverter(
-                            new PatientAdressConverter(
+                            new PatientAddressConverter(
                                     new VaccinationDateConverter(
                                             new VaccinationSiteConverter(
                                                     new VaccineConverter(new VaccineDoseConverter())

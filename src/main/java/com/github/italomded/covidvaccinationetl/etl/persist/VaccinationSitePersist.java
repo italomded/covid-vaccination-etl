@@ -15,7 +15,7 @@ public class VaccinationSitePersist extends DomainPersist {
     }
 
     @Override
-    protected boolean verify(Dimension dimension, EntityManager entityManager) {
+    protected Dimension verify(Dimension dimension, EntityManager entityManager) {
         VaccinationSite vaccinationSite = (VaccinationSite) dimension;
         Query query = entityManager.createQuery(queryText);
         query.setParameter("corporateName", vaccinationSite.getCorporateName());
