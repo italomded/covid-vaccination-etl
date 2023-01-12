@@ -22,15 +22,13 @@ public class Reader {
     public void read() {
         try {
             Scanner readerScan = new Scanner(file);
-            var counter = 1; // delete
             readerScan.nextLine();
             while (readerScan.hasNextLine()) {
-                counter++; // delete
                 String plainLine = readerScan.nextLine();
+                if (plainLine.isBlank()) break;
                 Line line = toLine(plainLine);
                 if (line == null) break;
-                data.add(line);
-                if (counter > 30) break; // delete
+                if (!line.p_patientIdentifier().isBlank()) data.add(line);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found!", e);
@@ -39,7 +37,7 @@ public class Reader {
 
     private Line toLine(String plainLine) {
         String[] lineArray = plainLine.replaceAll("\"", "").split(";");
-        if (lineArray.length != 32) return null;
+        if (lineArray.length < 31) return null;
         Line line = new Line(
                 lineArray[4], lineArray[3], lineArray[6], lineArray[9], lineArray[11], lineArray[10],
                 lineArray[27], lineArray[15], lineArray[18], lineArray[19], lineArray[30], lineArray[23],

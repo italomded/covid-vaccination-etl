@@ -13,6 +13,7 @@ public class Main {
             useCase.go(fileName);
             System.out.println("Done!");
         } catch (RuntimeException exception) {
+            exception.printStackTrace();
             System.out.println("Error: " + exception.getLocalizedMessage());
         }
     }
