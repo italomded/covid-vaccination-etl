@@ -13,7 +13,8 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"name"})
 @NoArgsConstructor
-@Entity(name = "dim_vaccine")
+@Table(name = "dim_vaccine")
+@Entity
 public class Vaccine implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;

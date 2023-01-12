@@ -10,7 +10,8 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"county"})
 @NoArgsConstructor
-@Entity(name = "dim_patient_adress")
+@Table(name = "dim_patient_adress")
+@Entity
 public class PatientAdress implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;

@@ -11,7 +11,8 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"fullDate"})
 @NoArgsConstructor
-@Entity(name = "dim_patient_birthdate")
+@Table(name = "dim_patient_birthdate")
+@Entity
 public class Birthdate implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;

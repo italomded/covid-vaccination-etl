@@ -14,7 +14,7 @@ public class ColorConverter extends Converter {
     @Override
     protected Dimension convert(Line line) {
         Color color = new Color();
-        color.setRepresentation(line.c_representation().charAt(0));
+        color.setRepresentation(line.c_representation());
         return color;
     }
 

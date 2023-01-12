@@ -13,7 +13,8 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"representation"})
 @NoArgsConstructor
-@Entity(name = "dim_biological_sex")
+@Table(name = "dim_biological_sex")
+@Entity
 public class BiologicalSex implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;

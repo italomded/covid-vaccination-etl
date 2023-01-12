@@ -14,7 +14,8 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = {"fullDate"})
 @NoArgsConstructor
-@Entity(name = "dim_vaccination_date")
+@Table(name = "dim_vaccination_date")
+@Entity
 public class VaccinationDate implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
