@@ -18,7 +18,7 @@ public abstract class DomainPersist {
             return verify(dimension, entityManager);
         } else {
             if (next != null) return next.run(dimension, entityManager);
-            throw new DomainPersistException("No domain persistence class listens to the type passed as an argument!" + dimension.getClass(), dimension.getClass());
+            throw new DomainPersistException("No domain persistence class listens to the type passed as an argument!", dimension.getClass());
         }
     }
 

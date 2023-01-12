@@ -1,4 +1,4 @@
-package com.github.italomded.covidvaccinationetl.utilities.lineconverter.converter;
+package com.github.italomded.covidvaccinationetl.etl.converter;
 
 import com.github.italomded.covidvaccinationetl.domain.csv.Line;
 import com.github.italomded.covidvaccinationetl.domain.dimension.Dimension;

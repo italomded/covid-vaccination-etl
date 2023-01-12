@@ -33,7 +33,7 @@ public class Reader {
                 if (counter > 30) break; // delete
             }
         } catch (FileNotFoundException e) {
-            System.out.println("[!] FILE NOT FOUND!");
+            throw new RuntimeException("File not found!", e);
         }
     }
 

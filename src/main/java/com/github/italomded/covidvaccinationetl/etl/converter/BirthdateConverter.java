@@ -1,4 +1,4 @@
-package com.github.italomded.covidvaccinationetl.utilities.lineconverter.converter;
+package com.github.italomded.covidvaccinationetl.etl.converter;
 
 import com.github.italomded.covidvaccinationetl.domain.csv.Line;
 import com.github.italomded.covidvaccinationetl.domain.dimension.Birthdate;
@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
 
 @NoArgsConstructor
 public class BirthdateConverter extends Converter {

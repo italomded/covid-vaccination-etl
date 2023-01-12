@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter @Setter
 @EqualsAndHashCode(of = {"patientIdentifier"})
 @NoArgsConstructor
-@Entity(name = "fact_patient")
+@Table(name = "fact_patient")
+@Entity
 public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
