@@ -16,7 +16,7 @@ public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column(nullable = false, unique = true, length = 90)
+    @Column(nullable = false, length = 90)
     private String patientIdentifier;
     @Column(nullable = false)
     private Integer quantity = 1;

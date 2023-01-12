@@ -11,7 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,13 +36,14 @@ public class Persist {
 
         for (Line line : data) {
             factDimensions.clear();
-            for (Dimension dimension : dimensions) {
-                dimension = lineConverter.toDimension(dimension, line);
-                dimension = domainPersist.run(dimension, entityManager);
-                factDimensions.add(dimension);
-            }
-            Patient patient = lineConverter.toPatient(line);
-            if (!patientExists(patient, entityManager)) {
+            boolean factAlreadyExist = patientExists(line, entityManager);
+            if (!factAlreadyExist) {
+                for (Dimension dimension : dimensions) {
+                    dimension = lineConverter.toDimension(dimension, line);
+                    dimension = domainPersist.run(dimension, entityManager);
+                    factDimensions.add(dimension);
+                }
+                Patient patient = lineConverter.toPatient(line);
                 for (Dimension dimension : factDimensions) {
                     patient = factRelationsSetter.run(patient, dimension);
                 }
@@ -51,10 +55,15 @@ public class Persist {
         entityManager.getTransaction().commit();
     }
 
-    private boolean patientExists(Patient patient, EntityManager entityManager) {
-        String queryText = "from Patient where patientIdentifier = :patientIdentifier";
+    private boolean patientExists(Line line, EntityManager entityManager) {
+        VaccinationDate vaccinationDate = (VaccinationDate) lineConverter.toDimension(new VaccinationDate(), line);
+        String queryText = "from Patient as P where P.patientIdentifier = :patientIdentifier and " +
+                "P.vaccinationDate.day = :day and P.vaccinationDate.month = :month and P.vaccinationDate.year = :year";
         Query query = entityManager.createQuery(queryText);
-        query.setParameter("patientIdentifier", patient.getPatientIdentifier());
+        query.setParameter("patientIdentifier", line.p_patientIdentifier());
+        query.setParameter("day", vaccinationDate.getDay());
+        query.setParameter("month", vaccinationDate.getMonth());
+        query.setParameter("year", vaccinationDate.getYear());
 
         List resultList = query.getResultList();
         if (resultList.isEmpty()) return false;
