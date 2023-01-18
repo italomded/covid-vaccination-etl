@@ -19,7 +19,7 @@ public class Vaccine implements Dimension {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column(nullable = false, length = 45, unique = true)
+    @Column(nullable = false, length = 90, unique = true)
     private String name;
     @Column(nullable = false, length = 45)
     private String category;

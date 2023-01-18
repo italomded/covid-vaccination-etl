@@ -17,7 +17,7 @@ public class VaccineConverter extends Converter {
         vaccine.setBatch(line.v_batch());
         vaccine.setName(line.v_name());
         vaccine.setCategory(line.v_category());
-        vaccine.setManufacturer(line.v_category());
+        vaccine.setManufacturer(line.v_manufacturer());
         return vaccine;
     }
 

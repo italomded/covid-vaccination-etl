@@ -6,6 +6,7 @@ import com.github.italomded.covidvaccinationetl.etl.LineConverter;
 import com.github.italomded.covidvaccinationetl.etl.Persist;
 import com.github.italomded.covidvaccinationetl.etl.Reader;
 import com.github.italomded.covidvaccinationetl.etl.persist.DomainPersist;
+import com.github.italomded.covidvaccinationetl.etl.replacer.Replacer;
 import com.github.italomded.covidvaccinationetl.etl.setter.FactRelationSetter;
 import com.github.italomded.covidvaccinationetl.utilities.Builder;
 
@@ -17,18 +18,29 @@ import java.util.Set;
 
 public class UseCase {
     public void go(String fileName) {
-        Path filePath = Paths.get(System.getProperty("user.dir"), "data", fileName + ".csv");
-        File file = new File(filePath.toUri());
-        Reader reader = new Reader(file);
-        reader.read();
+        try {
+            Path filePath = Paths.get(System.getProperty("user.dir"), "data", fileName + ".csv");
+            File file = new File(filePath.toUri());
+            Replacer replacer = Builder.buildReplacer();
+            Reader reader = new Reader(file, replacer);
 
-        List<Dimension> dimensions = Builder.buildDimensionList();
-        DomainPersist domainPersist = Builder.buildDomainPersist();
-        FactRelationSetter factRelationSetter = Builder.buildFactRelationSetter();
-        LineConverter lineConverter = Builder.buildLineConverter();
-        Set<Line> data = reader.getData();
+            System.out.println("Reading...");
+            reader.read();
+            Set<Line> data = reader.getData();
 
-        Persist persist = new Persist(dimensions, domainPersist, factRelationSetter, lineConverter, data);
-        persist.populate();
+            System.out.println("Preparing dependencies...");
+            List<Dimension> dimensions = Builder.buildDimensionList();
+            DomainPersist domainPersist = Builder.buildDomainPersist();
+            FactRelationSetter factRelationSetter = Builder.buildFactRelationSetter();
+            LineConverter lineConverter = Builder.buildLineConverter();
+            Persist persist = new Persist(dimensions, domainPersist, factRelationSetter, lineConverter, data);
+
+            System.out.println("Persisting data...");
+            persist.populate();
+            System.out.println("Done!");
+        } catch (RuntimeException exception) {
+            exception.printStackTrace();
+            System.out.println("Error: " + exception.getLocalizedMessage());
+        }
     }
 }

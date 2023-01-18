@@ -18,7 +18,7 @@ public class VaccinationDateConverter extends Converter {
 
     @Override
     protected Dimension convert(Line line) {
-        String dateText = line.bd_fullDate();
+        String dateText = line.vd_fullDate();
         LocalDate date = LocalDate.parse(dateText, dateTimeFormatter);
         VaccinationDate vaccinationDate = new VaccinationDate(date);
         return vaccinationDate;

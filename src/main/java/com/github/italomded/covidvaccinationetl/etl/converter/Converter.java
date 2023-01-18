@@ -14,7 +14,7 @@ public abstract class Converter {
             return convert(line);
         } else {
             if (next != null) return next.run(dimension, line);
-            return null;
+            throw new ConverterException("No converter class matches the type passed as an argument!", dimension.getClass());
         }
     }
     protected abstract Dimension convert(Line line);

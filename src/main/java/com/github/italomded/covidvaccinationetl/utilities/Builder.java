@@ -2,6 +2,9 @@ package com.github.italomded.covidvaccinationetl.utilities;
 
 import com.github.italomded.covidvaccinationetl.domain.dimension.*;
 import com.github.italomded.covidvaccinationetl.etl.persist.*;
+import com.github.italomded.covidvaccinationetl.etl.replacer.ManufacturerPfizerReplacer;
+import com.github.italomded.covidvaccinationetl.etl.replacer.ManufacturerSinovacReplacer;
+import com.github.italomded.covidvaccinationetl.etl.replacer.Replacer;
 import com.github.italomded.covidvaccinationetl.etl.setter.*;
 import com.github.italomded.covidvaccinationetl.etl.LineConverter;
 import com.github.italomded.covidvaccinationetl.etl.converter.*;
@@ -55,5 +58,10 @@ public class Builder {
                                                                         new VaccineDoseConverter())))))));
         LineConverter lineConverter = new LineConverter(converter);
         return  lineConverter;
+    }
+
+    public static Replacer buildReplacer() {
+        Replacer replacer = new ManufacturerPfizerReplacer(new ManufacturerSinovacReplacer());
+        return replacer;
     }
 }
